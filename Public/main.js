@@ -8,10 +8,22 @@ socket.on('messages',function(data){
 });
 
 function render(data){
-    var html= `<div>
-                    <strong>${data.autor}</strong>
-                    <em>${data.texto}</em>
-               </div>`;
+    var html = data.map(function(elem,index){
+        return (`<div>
+                    <strong>${elem.autor}</strong>
+                    <em>${elem.texto}</em>
+                </div>`);
+    }).join(" ");
+    
 
     document.getElementById('messages').innerHTML=html;
 };
+
+function addMessages(e){
+    var payload={
+        autor: document.getElementById('username').value,
+        texto: document.getElementById('texto').value
+    };
+    socket.emit('new-message',payload);
+    return false;
+}
