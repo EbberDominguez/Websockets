@@ -2,8 +2,9 @@
 // pueda conectarse con el backend
 var socket = io.connect('http://localhost:3002',{'forceNew':true});
 
-socket.on('message',function(data){
+socket.on('messages',function(data){
     console.log(data);
+    render(data);
 });
 
 function render(data){
@@ -12,5 +13,5 @@ function render(data){
                     <em>${data.texto}</em>
                </div>`;
 
-    document.getElementById('message').innerHTML=html;
+    document.getElementById('messages').innerHTML=html;
 };
